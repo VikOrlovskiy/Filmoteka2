@@ -1,0 +1,42 @@
+// ============================================
+.button {
+    color: $lite-text-color;
+    background-color: transparent;
+    border: 1px solid $lite-text-color;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 14px 36px 12px 36px;
+    min-width: 129px;
+    max-width: 136px;
+    text-transform: uppercase;
+    cursor: pointer;
+  
+    &:first-child {
+      margin-right: 15px;
+    }
+    &.active {
+      background-color: $acent-Bg-color;
+      border: 1px solid $acent-Bg-color;
+    }
+    &.modal-button {
+      color: $primary-text-color;
+      border: 1px solid $secondary-Bg-color;
+    }
+    &.modal-active{
+      background-color: $acent-Bg-color;
+      border: 1px solid $acent-Bg-color;
+      color: $lite-text-color;
+    }
+  }
+  // ===================footer==============
+  .footer_button{
+    color: $secondary-text-color;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      color: $acent-text-color;
+      text-decoration: underline $acent-text-color;
+    }
+  }
