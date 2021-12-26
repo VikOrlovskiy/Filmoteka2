@@ -1,0 +1,85 @@
+.header {
+    &_first-block {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 37px;
+    }
+    &-button-block {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .name {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    &_icon {
+      height: 24px;
+      width: 24px;
+      color: white;
+    }
+    &_icon:hover,
+    &_icon:focus {
+    fill: $acent-text-color;
+  }
+    &_title {
+      display: none;
+      font-weight: 500;
+      font-size: 30px;
+      color: $lite-text-color;
+      @media screen and (min-width: 768px) {
+        display: block;
+        margin-left: 10px;
+      }
+    }
+    &_title:hover,
+    &_title:focus {
+    color: $acent-text-color;
+  }
+  }
+  .navigation {
+    &_button {
+      background-color: transparent;
+      border: none;
+      color: $lite-text-color;
+      text-decoration: none;
+      cursor: pointer;
+  
+      &.active {
+        cursor: auto;
+        text-decoration: 3px underline $acent-text-color;
+      }
+    }
+  
+    &_button:last-child {
+      margin-left: 39px;
+    }
+  }
+  .serch {
+    @media screen and (min-width: 320px) {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+    &_input {
+      background-color: transparent;
+      color: $lite-text-color;
+      border: none;
+      border-bottom: 1px solid $lite-text-color;
+      min-width: 280px;
+      height: 20px;
+      margin-bottom: 20px;
+      @media screen and (min-width: 320px) {
+        margin: 0 auto 20px auto;
+      }
+      @media screen and (min-width: 480px) {
+        min-width: 336px;
+      }
+    }
+    &_text {
+      color: $warning-text-color;
+    }
+  }
+  
