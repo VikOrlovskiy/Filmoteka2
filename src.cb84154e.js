@@ -3,4 +3,4 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{"./../fonts/Roboto-Medium.eot":[["Roboto-Medium.88cbb6e0.eot","Pbrh"],"Pbrh"],"./../fonts/Roboto-Medium.woff":[["Roboto-Medium.a603c208.woff","aGep"],"aGep"],"./../fonts/Roboto-Medium.ttf":[["Roboto-Medium.f1c32734.ttf","qops"],"qops"],"./../fonts/Roboto-Medium.svg":[["Roboto-Medium.766c522f.svg","DUQj"],"DUQj"],"./../fonts/Roboto-Regular.eot":[["Roboto-Regular.c3e8c01a.eot","mvwk"],"mvwk"],"./../fonts/Roboto-Regular.woff":[["Roboto-Regular.7474817b.woff","xTI8"],"xTI8"],"./../fonts/Roboto-Regular.ttf":[["Roboto-Regular.5c3119f7.ttf","E3dE"],"E3dE"],"./../fonts/Roboto-Regular.svg":[["Roboto-Regular.21fabb5e.svg","AM97"],"AM97"],"./../images/header/1.png":[["1.993dc836.png","NBdZ"],"NBdZ"],"./../images/header/2.png":[["2.f7f1e5ac.png","fw1p"],"fw1p"]}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss");
 },{"./sass/main.scss":"clu1"}]},{},["Focm"], null)
-//# sourceMappingURL=/Filmoteka2/src.b9f842b8.js.map
+//# sourceMappingURL=/Filmoteka2/src.cb84154e.js.map
