@@ -1,0 +1,76 @@
+//zero stiles setup
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+// ==================================================================
+// picture stiles setup
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+// ==================================================================
+// main body stiles
+body {
+  font-family: $primary-font-family;
+  font-size: $primary-font-size;
+}
+
+// ==================================================================
+// main container stiles
+.container {
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  @media screen and (min-width: 480px) {
+    width: 480px;
+    padding: 0 20px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    padding: 0 34px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 1024px;
+    padding: 0 71px;
+  }
+}
+.container-header {
+  background-color: $header-Bg-color;
+  height: 230px;
+  padding-top: 46px;
+  background-image: url(../images/header/1.png);
+  &.active {
+    background-image: url(../images/header/2.png);
+  }
+  @media screen and (min-width: 768px) {
+    padding-top: 41px;
+  }
+}
+.container-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $footer-Bg-color;
+  padding: 29px 0;
+  font-size: $third-font-size;
+  color: $secondary-text-color;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+// ==================================================================
+//class visible hidden
+.is-hidden {
+  @extend %invisible;
+}
