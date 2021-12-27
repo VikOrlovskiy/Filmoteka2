@@ -17,8 +17,8 @@ export default  {
     // =====================main====================================
     galleryRef:document.getElementById('gallery'),
      // =====================pagination=============================
-    paginationList:document.querySelector('.pagination_list'),
-    lastPagePagination:document.querySelector('.last-page'),
+    // paginationList:document.querySelector('.pagination_list'),
+    // lastPagePagination:document.querySelector('.last-page'),
     // =======================modal=================================
     // backDrop: document.querySelector('.back-drop'),
     // modalWindow: document.querySelector('.modal'),
