@@ -18,25 +18,26 @@
     &_icon {
       height: 24px;
       width: 24px;
-      color: white;
+      fill: $lite-text-color;
+      transition: 250ms fill $primary-animation;
     }
-    &_icon:hover,
-    &_icon:focus {
-    fill: $acent-text-color;
-  }
     &_title {
       display: none;
       font-weight: 500;
       font-size: 30px;
       color: $lite-text-color;
+      transition: 250ms color $primary-animation;
       @media screen and (min-width: 768px) {
         display: block;
         margin-left: 10px;
       }
     }
-    &_title:hover,
-    &_title:focus {
+    &:hover .name_icon,
+    &:hover .name_title,
+    &:focus .name_title,
+    &:focus .name_icon {
     color: $acent-text-color;
+    fill: $acent-text-color;
   }
   }
   .navigation {
@@ -46,10 +47,17 @@
       color: $lite-text-color;
       text-decoration: none;
       cursor: pointer;
-  
+      transition: 250ms color $primary-animation;
+
+      &:hover,&:focus{
+        color: $acent-text-color;
+      }
       &.active {
         cursor: auto;
         text-decoration: 3px underline $acent-text-color;
+        &:hover,&:focus{
+          color: $lite-text-color;
+        }
       }
     }
   
@@ -57,11 +65,20 @@
       margin-left: 39px;
     }
   }
-  .serch {
+  .search {
     @media screen and (min-width: 320px) {
       display: flex;
       flex-direction: column;
       text-align: center;
+    }
+    &_block{
+      position: relative;
+      @media screen and (min-width: 320px) {
+        margin: 0 auto 20px auto;
+      }
+    }
+    &_icon{
+      fill:$lite-text-color;
     }
     &_input {
       background-color: transparent;
@@ -71,12 +88,12 @@
       min-width: 280px;
       height: 20px;
       margin-bottom: 20px;
-      @media screen and (min-width: 320px) {
-        margin: 0 auto 20px auto;
+      outline: transparent;
+      transition: 250ms border-bottom $primary-animation;
+      &:hover,&:focus{
+        border-bottom: 1px solid $acent-text-color;
       }
-      @media screen and (min-width: 480px) {
-        min-width: 336px;
-      }
+     
     }
     &_text {
       color: $warning-text-color;
