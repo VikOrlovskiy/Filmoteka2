@@ -48,6 +48,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    transition: 250ms  color $primary-animation , 250ms  text-decoration $primary-animation;
     &:hover,
     &:focus {
       color: $acent-text-color;
