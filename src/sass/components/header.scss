@@ -55,6 +55,7 @@
       &.active {
         cursor: auto;
         text-decoration: 3px underline $acent-text-color;
+        transition: 250ms text-decoration $primary-animation;
         &:hover,&:focus{
           color: $lite-text-color;
         }
