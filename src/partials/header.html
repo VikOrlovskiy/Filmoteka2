@@ -12,9 +12,18 @@
           <button class="navigation_button" data-action="LIBRARY">MY LIBRARY</button>
         </nav>
       </div>
-      <div class="serch" id="serch">
-        <input class="serch_input" type="serch"  placeholder="Поиск фильмов" />
-        <span class="serch_text"></span>
+      <div class="search" id="search">
+       <form class="search_block">
+        <input class="search_input" type="search"  placeholder="Поиск фильмов" />
+        <button type="button" class="searching_button" aria-expanded="false">
+          <svg class="search_icon" width="12px" height="12px">
+            <use
+              xlink:href="./images/svg/svg-sprite.svg#search"
+            ></use>
+          </svg>
+        </button>
+       </form>
+        <span class="search_text"></span>
       </div>
       <div class="header-button-block is-hidden" id="buttons">
         <button class="button active" data-action="Watched">Watched</button>
