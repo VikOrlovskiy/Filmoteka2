@@ -28,9 +28,23 @@
       color: $lite-text-color;
     }
   }
+  // ===================header=============
+  .searching_button{
+    position: absolute;
+    top: 2px;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 250ms fill $primary-animation;
+    &:hover .search_icon,&:focus .search_icon{
+      fill:$acent-text-color; 
+    }
+  }
   // ===================footer==============
   .footer_button{
     color: $secondary-text-color;
+    padding: 0;
     border: none;
     background-color: transparent;
     cursor: pointer;
