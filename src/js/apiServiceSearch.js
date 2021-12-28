@@ -15,9 +15,8 @@ constructor(){
     }
 // ============= GET FILM GENRE ===============  
 fetchGenres() {
-    return axios.get(`${URL}/genre/movie/list?${KEY}&language=${this.language}`).then(response=> {
-     console.log(this.genres )   
-     this.genres = response.data.genres})}
+    return axios.get(`${URL}/genre/movie/list?${KEY}&language=${this.language}`)
+    .then(response=> {this.genres = response.data.genres})}
 // ================== GET top film ===============  
 fetchTopFilms() {
    return axios.get(`${URL}trending/movie/week?${KEY}&page=${this.page}`).then(films => films.data)} 
