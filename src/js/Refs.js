@@ -20,8 +20,10 @@ export default  {
     // paginationList:document.querySelector('.pagination_list'),
     // lastPagePagination:document.querySelector('.last-page'),
     // =======================modal=================================
-    // backDrop: document.querySelector('.back-drop'),
-    // modalWindow: document.querySelector('.modal'),
+    backDrop: document.querySelector('.back-drop'),
+    modalWindow: document.querySelector('.modal'),
+    productCardInWindow: document.querySelector('.product'),
+    modalButtonClose:document.querySelector('.modal_close'),
     // =======================footer================================
     // backDrop: document.querySelector('.back-drop'),
     // modalWindow: document.querySelector('.modal'),
