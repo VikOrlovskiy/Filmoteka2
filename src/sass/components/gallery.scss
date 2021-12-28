@@ -8,6 +8,8 @@ margin: 60px -30px -30px 0 ;
   &_item {
       height: 440px;
       margin-bottom: 20px;
+      cursor: pointer;
+      transition: 250ms transform $primary-animation;
       @media screen and (min-width: 768px) {
         width: calc((100% - ( 30px * 2)) / 2);
         margin-bottom: 30px;
@@ -17,7 +19,7 @@ margin: 60px -30px -30px 0 ;
         width: calc((100% - ( 30px * 3)) / 3);
       }
       &:hover ,&:focus{
-        background-color: blueviolet;
+        transform: scale(1.05);
       }
   }
   &_item:last-child {
@@ -28,7 +30,7 @@ margin: 60px -30px -30px 0 ;
     width: 100%;
     margin-bottom: 10px;
   }
-  &_tex {
+  &_title {
     font-weight: 500;
     text-transform: uppercase;
     color:$primary-text-color;
