@@ -1,24 +1,24 @@
 import Refs from "./Refs";
 import DataFetch from "./apiServiceSearch";
 const dataFetch = new DataFetch()
-// ==================import HBS===================================
+// ==================import HBS==============================
 import filmsGalery from '../templates/films.hbs';
-// ==================first page load========================
+// ==================first page load=========================
 window.addEventListener('load',onloadFetchTopfilms)
-// ==================reload page ========================
+// ==================reload page ============================
 Refs.backHomePage.addEventListener('click' , onClickReloadPage)
 // ==================search by submit========================
 Refs.searchForm.addEventListener('submit', onClickGetSerchValue )
-// ==================navigation btn========================
+// ==================navigation btn=========================
 Refs.navigationPanel.addEventListener('click', onClickChengeNavigationPage)
-// ==================library btn========================
+// ==================library btn============================
 Refs.userButtons.addEventListener('click', onClickShowWatchedAndQueue)
-// =================functions================================
+// =================functions===============================
 function onClickReloadPage(){location.reload()}
-// =================functions first page render==============
+// =================functions first page render=============
 async function onloadFetchTopfilms(){ 
     // genry fetch
-    await dataFetch.fetchGenres()
+    await DataFetch.fetchGenres()
     // TopFilms fetch and render
     await dataFetch.fetchTopFilms().then(films => {
          renderFilmsCard(films.results)})
@@ -26,7 +26,6 @@ async function onloadFetchTopfilms(){
 // ==== renderFilmsCard ======
 function renderFilmsCard(films){
     return films.map(({original_title , release_date , poster_path ,genre_ids,vote_average,id}) => {
-        console.log(id)
         let correctYear = correctYearRelease(release_date);
         let filmGenry = filterFilmGenrys(genre_ids);
   Refs.galleryRef.insertAdjacentHTML('afterbegin',filmsGalery({filmGenry ,original_title , correctYear, poster_path ,vote_average,id}))})
@@ -37,7 +36,7 @@ function correctYearRelease(release_date){
 }
 function filterFilmGenrys(genre_ids){
    let genreList = genre_ids
-   .map(id => dataFetch.genres.filter(genre => genre.id === id).map(genre => genre.name))
+   .map(id => DataFetch.genres.filter(genre => genre.id === id).map(genre => genre.name))
    .flat();
  if (genreList.length === 0) {
    return (genreList = [`Unknown`]);
@@ -57,10 +56,13 @@ function onClickGetSerchValue(e){
     if(this.search.value === ''){
     Refs.errorTextField.textContent = 'Search result not successful. Enter the correct movie name and ';
     return}
-    let searchValue = this.search.value.trim();
+    dataFetch.searchValue = this.search.value.trim();
     Refs.errorTextField.textContent = '';
     this.search.value ='';
-}
+    Refs.galleryRef.innerHTML = '';
+    dataFetch.fetchFilms().then(films =>renderFilmsCard(films.results))
+    }
+    
 function onClickChengeNavigationPage(e){
     // active btn
     const activeBtn = document.querySelector('.navigation_button.active');
