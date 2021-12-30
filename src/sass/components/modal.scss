@@ -6,10 +6,9 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.25);
     opacity: 1;
-    transition: opacity 250ms $primary-animation;
+    transition:  250ms opacity $primary-animation;
     overflow-y: scroll;
     padding: 40px 20px 20px 20px;
-    
   
     &.is-hidden {
       opacity: 0;
@@ -24,7 +23,7 @@
   padding: 48px 20px 20px 20px;
   transform: translate(-50%, -50%);
   min-width: 280px;
-  max-width: 480px;
+  max-width: 100%;
 
   @media screen and (min-width: 768px) {
     min-width: 768px;
@@ -34,6 +33,7 @@
     max-width: 882px;
   }
   &_close{
+    fill: $primary-text-color;
     position: absolute;
     top:10px;
     right: 10px;
@@ -44,16 +44,31 @@
       width: 30px;
       height: 30px;
       margin-bottom: 8px;
+      cursor: pointer;
+      transition: 250ms fill $primary-animation;
+      &:hover,&:focus{
+        fill: $acent-text-color;
+      }
   }
   &_close-icon{
     max-height: 30px;
   }
   &-button-container{
     display: flex ;
+    justify-content: center;
+    @media screen and (min-width: 768px) {
+      justify-content: flex-start;
+    }
   }
   &-button{
-    min-width: 119px;
+    min-width: 112px;
     padding: 14px 0;
+    @media screen and (min-width: 480px) {
+      &-wrap{
+        display: none;
+      }
+    }
+    
   }
 
 }
