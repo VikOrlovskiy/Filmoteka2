@@ -2,15 +2,16 @@
         <div class="product_content">
             <h2 class="product_title">{{title}}</h2>
             <ul class="product_list">
-                <li class="product_item"><p class="product_discribe">Vote / Votes</p><span class="gallery_voise">{{vote_average}}</span><span class="gallery_voise gallery_voise-dark">{{vote_count}}</span></li>
+                <li class="product_item"><p class="product_discribe">Vote / Votes</p><span class="gallery_voise product_voise">{{vote_average}}</span><span class="product_slash">/</span><span class="gallery_voise gallery_voise-dark">{{vote_count}}</span></li>
                 <li class="product_item"><p class="product_discribe">Popularity</p><span>{{rounded}}</span></li>
                 <li class="product_item"><p class="product_discribe">Original Title</p><span>{{original_title}}</span></li>
                 <li class="product_item"><p class="product_discribe">Genre</p><span>{{filmGenry}}</span></li>
             </ul>
             <h3 class="product_subtitle">About</h3>
             <p class="product_about">{{overview}}</p>
-         </div>
-             <div class="modal-button-container">
-        <button class="button modal-button modal-active" data-action="Watched">add to Watched</button>
-        <button class="button modal-button" data-action="queue">add to queue</button>
+            <div class="modal-button-container">
+        <button class="button modal-button modal-active" data-action="Watched">add <br class="modal-button-wrap"> to Watched</button>
+        <button class="button modal-button" data-action="queue">add <br class="modal-button-wrap"> to queue</button>
     </div>
+         </div>
+             
