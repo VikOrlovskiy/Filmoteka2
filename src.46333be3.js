@@ -85,4 +85,4 @@ var e,t=arguments[3];!function(t,r){"object"==typeof exports&&"object"==typeof m
 },{"./Refs":"rBUd"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/Refs"),require("./js/header"),require("./js/gallery"),require("./js/pagination"),require("./js/footer");
 },{"./sass/main.scss":"clu1","./js/Refs":"rBUd","./js/header":"cGsR","./js/gallery":"chxP","./js/pagination":"o8lo","./js/footer":"b5Ik"}]},{},["Focm"], null)
-//# sourceMappingURL=/Filmoteka2/src.512f2d15.js.map
+//# sourceMappingURL=/Filmoteka2/src.46333be3.js.map
