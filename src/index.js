@@ -4,6 +4,8 @@ import './sass/main.scss';
 import "./js/Refs";
 // ==========Document HEADER=========
 import "./js/header";
+// ==========Document MAIN========
 import "./js/gallery";
+import "./js/pagination";
 // ==========Document FOOTER=========
 import "./js/footer";
