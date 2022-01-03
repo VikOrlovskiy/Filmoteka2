@@ -1,30 +1,38 @@
 import Refs from "./Refs";
 import DataFetch from "./apiServiceSearch";
 import {renderFilmsCard} from "./renderFilmsCard";
+import Pagination from 'tui-pagination';
 const dataFetch = new DataFetch()
+const debounce = require('lodash.debounce');
+const DEBOUNCE_DELAY = 300;
 // ==================reload page ============================
 Refs.backHomePage.addEventListener('click' , onClickReloadPage)
-// ==================search by submit========================
-Refs.searchForm.addEventListener('submit', onClickGetSerchValue )
+// ==================search by input========================
+Refs.searchInput.addEventListener('input', debounce(onFilmSerchValue, DEBOUNCE_DELAY));
 // ==================navigation btn=========================
 Refs.navigationPanel.addEventListener('click', onClickChengeNavigationPage)
 // ==================library btn============================
 Refs.userButtons.addEventListener('click', onClickShowWatchedAndQueue)
 // =================functions===============================
 function onClickReloadPage(){location.reload()}
-
-function onClickGetSerchValue(e){
+// ====================serch film==========================
+function onFilmSerchValue(e) {
     e.preventDefault()
-    if(this.search.value === ''){
-    Refs.errorTextField.textContent = 'Search result not successful. Enter the correct movie name and ';
+    if( e.target.value === ''){
+        dataFetch.fetchTopFilms().then(films => {renderFilmsCard(films.results)});
+        Refs.errorTextField.textContent ='Search result not successful. Enter the correct movie name'
     return}
-    dataFetch.searchValue = this.search.value.trim();
-    Refs.errorTextField.textContent = '';
-    this.search.value ='';
-    Refs.galleryRef.innerHTML = '';
-    dataFetch.fetchFilms().then(films =>renderFilmsCard(films.results))
-    }
-    
+      dataFetch.query = e.target.value.trim();
+      Refs.galleryRef.innerHTML = '';
+      dataFetch.fetchFilms().then(films =>{
+      if(films.results.length === 0){dataFetch.fetchTopFilms().then(films => {renderFilmsCard(films.results)});
+          Refs.errorTextField.textContent ='Search result not successful. Enter the correct movie name'
+    return}
+      Refs.errorTextField.textContent =''
+      renderFilmsCard(films.results)
+      onClickPaginationFilms ()
+    })
+}
 function onClickChengeNavigationPage(e){
     // active btn
     const activeBtn = document.querySelector('.navigation_button.active');
@@ -45,7 +53,8 @@ function onClickChengeNavigationPage(e){
     // fetch users film
    if(e.target.dataset.action === 'LIBRARY'){
     // clear library field
-    // Refs.galleryRef.innerHTML = '';
+    Refs.galleryRef.innerHTML = '<p>you</p>';
+    Refs.paginationContainer.classList.add("is-hidden")
     // fetch user library films
     return;
     }
@@ -65,3 +74,19 @@ function onClickShowWatchedAndQueue(e){
     activeBtn.classList.remove('active');
     e.target.classList.add('active');
 }
+function onClickPaginationFilms (){
+    dataFetch.page = 1;
+    const instance2 = new Pagination(Refs.paginationContainer, {
+      totalItems: DataFetch.totalPages,
+      itemsPerPage: 20,
+      visiblePages:  5,
+      centerAlign: true,
+    });
+    instance2.on('beforeMove', (event) => {
+      console.log(event.page)
+      dataFetch.page = event.page;
+      dataFetch.fetchFilms().then(films => {
+        Refs.galleryRef.innerHTML = '';
+        renderFilmsCard(films.results)})
+    })
+  }
