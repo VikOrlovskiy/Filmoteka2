@@ -9,7 +9,7 @@ static fetchGenres() {
         return axios.get(`${URL}/genre/movie/list?${KEY}&language=${this.language}`)
     .then(response=> {this.genres = response.data.genres})}
 // ============= GET film by ID ===============
-    static  fetchFilmByID() {
+static  fetchFilmByID() {
         return axios.get(`${URL}/movie/${this.moveID}?${KEY}&language=${this.language}`).then(response => response.data)} ;
 constructor(){
     this.searchValue = '';
@@ -18,15 +18,19 @@ constructor(){
     this.moveID = 0;
     this.genres=[];
     this.page = 1;
-    this.totalPages = 99;
-    console.log(this.page)
+    this.totalPages = 0;
+    console.log(this.totalPages)
     }
 // ============= GET film by user value ===============  
 fetchFilms() {
-   return axios.get(`${URL}search/movie?${KEY}&language=${this.language}&query=${this.searchValue}&page=${this.page}&include_adult=${this.filmForAdult}`).then(response => response.data)} 
+   return axios.get(`${URL}search/movie?${KEY}&language=${this.language}&query=${this.searchValue}&page=${this.page}&include_adult=${this.filmForAdult}`).then(response => {
+    this.totalPages =  response.data.total_pages   
+    return response.data})} 
 // ================== GET top film ===============  
 fetchTopFilms() {
-    return axios.get(`${URL}trending/movie/week?${KEY}&page=${this.page}`).then(films => {return  films.data})} 
+    return axios.get(`${URL}trending/movie/week?${KEY}&page=${this.page}`).then(response => {
+        this.totalPages =  response.data.total_pages
+        return  response.data})} 
 // =============Pagination Actions===============  
    nextPage(){this.page +=1;}
    prewPage(){this.page -=1;}
@@ -36,4 +40,6 @@ fetchTopFilms() {
     set query(newQuery) {this.searchQuery = newQuery}
     get pageNum() {return this.page}
     set pageNum(newPage) {this.page = newPage}
+    get totalPages() {return DataFetch.totalPages;}
+    set totalPages(page) {DataFetch.totalPages = page;}
 }

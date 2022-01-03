@@ -3,47 +3,48 @@ import DataFetch from "./apiServiceSearch";
 // const dataFetch  = new DataFetch
 // ==================import HBS==============================
 import filmsGalery from '../templates/films.hbs';
-
 // =========================================================================
-Refs.paginationList.addEventListener('click', e =>{
-      // dataFetch.fetchTopFilms().then(films => {
-      //   Refs.galleryRef.innerHTML = '';
-      //   filmsGalery(films.results)})
-      onClickChengeFilmsPage(e)
-    // filmsApiService.fetchFilms().then(films => {
-    //   Refs.galleryRef.innerHTML = '';
-    //   createfilmsCard(films.results)});
-    //   onClickChengeFilmsPage(e)}) 
-})
-function onClickChengeFilmsPage(e){
-  let firstPage = 1;
-  let totalPages = 999;
-  let correctPage = 1;
-    // ===============close gate======================
-      if(e.target.classList.contains("pagination_list") || e.target.classList.contains("dots")){
-    return
-      }
-    // ===============prev page button======================
-    if(e.target.dataset.action === 'prewPage'){
-      if(correctPage < 1){return}
+  Refs.paginationList.addEventListener('click', e =>{
+let firstPage = 1;
+let totalPages = 100;
+let correctPage = 1;
+    onClickChengeFilmsPage(e,totalPages,correctPage)
+  Refs.firstPagePagination.textContent = firstPage
+  Refs.prevPageNumber.textContent = correctPage - 1
+  Refs.nextPageNumber.textContent = correctPage + 1
+  Refs.lastPagePagination.textContent = totalPages
+  Refs.activePaginationPage.textContent = correctPage
+  }) 
+
+function onClickChengeFilmsPage(e,totalPages,correctPage){
+
+  // totalPages 
+  // correctPage 
+console.log(totalPages,correctPage)
+  // ===============close gate======================
+    if(e.target.classList.contains("pagination_list") || e.target.classList.contains("dots")){
+  return
     }
-    // ===============first page button======================
-    else if(e.target.dataset.action === 'reset'){ 
-      correctPage = firstPage
-    }
-    // ===============last page button======================
-    else if(e.target.dataset.action === 'last-page'){ 
-      correctPage =  totalPages
-    }
-    // ===============next page button======================
-    else if(e.target.dataset.action === 'nextPage'){ 
-    }
-    Refs.firstPagePagination.textContent = firstPage
-    Refs.prevPageNumber.textContent = correctPage - 1
-    Refs.nextPageNumber.textContent = correctPage + 1
-    Refs.lastPagePagination.textContent = totalPages
-    Refs.activePaginationPage.textContent = correctPage
-     }
+  // ===============prev page button======================
+  if(e.target.dataset.action === 'prewPage'){
+    if(correctPage < 1){return}
+   return correctPage -= 1;
+  }
+  // ===============first page button======================
+  else if(e.target.dataset.action === 'reset'){ 
+  return  correctPage = 1;
+    // DataFetch.pageReset()
+  }
+  // ===============last page button======================
+  else if(e.target.dataset.action === 'last-page'){ 
+   return correctPage = DataFetch.totalPages
+  }
+  // ===============next page button======================
+  else if(e.target.dataset.action === 'nextPage'){ 
+   return correctPage += 1;
+    // DataFetch.nextPage()
+  }
+   }
 
     function onHidePaginationNextElements(){
       Refs.paginationListButtonNextPage.classList.add('is-hidden')

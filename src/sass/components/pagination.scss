@@ -1,42 +1,42 @@
-.pagination{
-
+.tui-pagination{
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
     padding: 30px 0;
-    &_list{
-        display: flex;
-        justify-content: center;
-        font-weight: 500;
-        &>li{
+
+        &>span,&>a{
+            color: $primary-text-color;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-right: 2px;
             padding: 10px;
             cursor: pointer;
+            text-decoration: none;
         }
-        &>li:last-child{
+        &>span:last-child{
             margin-right: 0;
         }
         & .dots{
             cursor: default;
         }
-        & .number.active{
+        &>strong{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 40px;
             height: 40px;
             border-radius: 5px;
             background-color: $acent-text-color;
             color: $lite-text-color;
         }
-    }
-    &_item{
+    & .tui-first ,& .tui-last,.tui-next,.tui-prev{
         width: 40px;
         height: 40px;
         background-color: $footer-Bg-color;
         border-radius: 5px;
     }
-    
-    &_icon{
-        width: 16px;
-            max-height: 16px;
-        
-    }
 }
+// instance.setTotalItems(10000);
+// instance.getCurrentPage();
+// instance.reset();

@@ -1,6 +1,33 @@
 import Refs from "./Refs";
+import {renderFilmsCard} from "./renderFilmsCard";
 import filmCard from '../templates/film.hbs';
 import DataFetch from "./apiServiceSearch";
+import Pagination from 'tui-pagination';
+const dataFetch = new DataFetch()
+// ==================first page load=========================
+window.addEventListener('load',onloadFetchTopfilms)
+// =================functions first page render=============
+async function onloadFetchTopfilms(){ 
+  // genry fetch
+  await DataFetch.fetchGenres()
+  // TopFilms fetch and render
+  await dataFetch.fetchTopFilms().then(films => {
+       renderFilmsCard(films.results)
+      //  onPaginationPage(dataFetch.totalPages * 19)
+       const instance = new Pagination(Refs.paginationContainer, {
+        totalItems: dataFetch.totalPages * 19,
+        itemsPerPage: 19,
+        visiblePages:  5,
+        centerAlign: true,
+      });
+      instance.on('beforeMove', (event) => {
+        dataFetch.page = event.page;
+        dataFetch.fetchTopFilms().then(films => {
+          Refs.galleryRef.innerHTML = '';
+          renderFilmsCard(films.results)})
+      })
+      })
+}
 // ====================open selected film==========================
 Refs.galleryRef.addEventListener('click', openfilm);
 
@@ -38,3 +65,22 @@ function openfilm(e) {
   function onClickButtonModalClose(){
     Refs.modalButtonClose.addEventListener('click', e => Refs.backDrop.classList.add('is-hidden'))
   }
+
+
+  // function onPaginationPage (totalItems){
+  //   console.log(totalItems)
+  //   const instance = new Pagination(Refs.paginationContainer, {
+  //     totalItems: totalItems,
+  //     itemsPerPage: 19,
+  //     visiblePages:  5,
+  //     centerAlign: true,
+  //   });
+
+  //   instance.on('beforeMove', (event) => {
+  //     dataFetch.fetchTopFilms().then(films => {
+  //       Refs.galleryRef.innerHTML = '';
+  //       renderFilmsCard(films.results)})
+  //   });
+  // }
+
+  // onPaginationPage(1000)
