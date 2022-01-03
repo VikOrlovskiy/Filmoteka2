@@ -20,6 +20,7 @@ export default  {
     backDrop: document.querySelector('.back-drop'),
     modalWindow: document.querySelector('.modal'),
     productCardInWindow: document.querySelector('.product'),
+    teamListModal: document.querySelector('.dev_team'),
     modalButtonClose:document.querySelector('.modal_close'),
     // =======================pagination============================
     paginationContainer:document.getElementById('pagination'),
