@@ -23,19 +23,8 @@ export default  {
     modalButtonClose:document.querySelector('.modal_close'),
     // =======================pagination============================
     paginationContainer:document.getElementById('pagination'),
-    // paginationList:document.querySelector('.pagination_list'),
-    // paginationListButtonPrevPage:document.querySelector('.prewPage'),
-    // firstPagePagination:document.querySelector('.first-page'),
-    // prevPageNumber:document.querySelector('.number.prewPage'),
-    // prevPageDots:document.querySelector('.dots.prewPage'),
-    // activePaginationPage:document.querySelector('.number.active'),
-    // nextPageNumber:document.querySelector('.number.nextPage'),
-    // nextPageDots:document.querySelector('.dots.nextPage'),
-    // lastPagePagination:document.querySelector('.last-page'),
-    // paginationListButtonNextPage:document.querySelector('.pagination_item.nextPage'),
     // =======================footer================================
-    // backDrop: document.querySelector('.back-drop'),
-    // modalWindow: document.querySelector('.modal'),
+    footerButtonTeamModal: document.querySelector('.footer_button'),
 
   };
   
