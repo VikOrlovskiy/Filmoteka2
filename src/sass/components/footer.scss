@@ -16,6 +16,9 @@
   }
  .copirigth {
      display: flex;
+     @media screen and (max-width: 768px) {
+      margin-bottom: 10px;
+    }
      &_item{
     margin-right: 3px;
      }
