@@ -19,25 +19,22 @@ constructor(){
     this.genres=[];
     this.page = 1;
     this.totalPages = 0;
-    console.log(this.totalPages)
     }
 // ============= GET film by user value ===============  
 fetchFilms() {
    return axios.get(`${URL}search/movie?${KEY}&language=${this.language}&query=${this.searchValue}&page=${this.page}&include_adult=${this.filmForAdult}`).then(response => {
-    this.totalPages =  response.data.total_pages   
+    this.totalPages =  response.data.total_results
+    console.log(response.data)   
     return response.data})} 
 // ================== GET top film ===============  
 fetchTopFilms() {
     return axios.get(`${URL}trending/movie/week?${KEY}&page=${this.page}`).then(response => {
-        this.totalPages =  response.data.total_pages
+        this.totalPages =  response.data.total_results
+        console.log(response.data)   
         return  response.data})} 
-// =============Pagination Actions===============  
-   nextPage(){this.page +=1;}
-   prewPage(){this.page -=1;}
-   pageReset(){this.page = 1;}
 // =================== get/set=======================
-    get query() {return this.searchQuery}
-    set query(newQuery) {this.searchQuery = newQuery}
+    get query() {return this.searchValue}
+    set query(searchValue) {this.searchValue = searchValue}
     get pageNum() {return this.page}
     set pageNum(newPage) {this.page = newPage}
     get totalPages() {return DataFetch.totalPages;}
