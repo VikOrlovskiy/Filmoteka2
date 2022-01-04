@@ -24,7 +24,10 @@ body {
   font-family: $primary-font-family;
   font-size: $primary-font-size;
 }
-
+body.modal-open {
+  max-height: 100vh;
+  overflow: hidden;
+}
 // ==================================================================
 // main container stiles
 .container {
