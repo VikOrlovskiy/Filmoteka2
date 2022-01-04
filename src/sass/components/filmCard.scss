@@ -5,10 +5,9 @@
     justify-content: space-between;
 }
   &_img-thumb{
-      width: 100%;
       margin-bottom: 30px;
       @media screen and (min-width: 768px) {
-          max-width: 400px;
+      width: calc(100%/2);
       margin-right: 30px;
       margin-bottom: 0;}
   }
@@ -17,6 +16,10 @@
       width: 100%;
       max-height: 500px;
       
+  }
+  &_content{
+    @media screen and (min-width: 768px) {
+        width: calc(100%/2)}
   }
       
   &_title{
