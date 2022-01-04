@@ -1,4 +1,5 @@
 export default  {
+    body: document.querySelector('body'),
     // =====================header=================================
     headerContainer:document.querySelector('.container-header'),
     // =====================sitename===============================
@@ -10,8 +11,6 @@ export default  {
     userButtons:document.querySelector('.header-button-block'),
     // ===============search=======================================
     searchBlock: document.querySelector('.search'),
-    searchForm: document.querySelector('#search'),
-    searchButton: document.querySelector('.searching_button'),
     searchInput: document.querySelector('.search_input'),
     errorTextField:document.querySelector('.search_text'),
     // =====================main====================================
@@ -19,8 +18,7 @@ export default  {
     // =======================modal=================================
     backDrop: document.querySelector('.back-drop'),
     modalWindow: document.querySelector('.modal'),
-    productCardInWindow: document.querySelector('.product'),
-    teamListModal: document.querySelector('.dev_team'),
+    modalContentContainer: document.querySelector('.container-modal'),
     modalButtonClose:document.querySelector('.modal_close'),
     // =======================pagination============================
     paginationContainer:document.getElementById('pagination'),
