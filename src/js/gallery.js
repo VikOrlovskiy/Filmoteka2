@@ -1,7 +1,7 @@
 import Refs from "./Refs";
 import Pagination from 'tui-pagination';
 import {renderFilmsCard} from "./renderFilmsCard";
-import {onPressEscapeModalClose,onClickBackdropModalClose,onClickButtonModalClose} from "./closeModalFunctions";
+import {onModalClose} from "./closeModalFunctions";
 import filmCard from '../templates/film.hbs';
 import DataFetch from "./apiServiceSearch";
 const dataFetch = new DataFetch()
@@ -15,33 +15,28 @@ async function onloadFetchTopfilms(){
   await DataFetch.fetchGenres()
   // TopFilms fetch and render
   await dataFetch.fetchTopFilms().then(films => {
-       renderFilmsCard(films.results)
-      //  pagination top films
-       onClickPaginationTopFilms ()
+    renderFilmsCard(films.results)
+  //  pagination top films
+    onClickPaginationTopFilms ()
 })}
-// =================functions open film by click=============
+// ==================function open film by click============
 function openfilm(e) {
   if(e.target.nodeName === 'UL' || e.target.nodeName === 'LI'){return}
+  Refs.modalContentContainer.innerHTML = '';
   DataFetch.moveID = e.target.parentNode.dataset.id
-    Refs.productCardInWindow.innerHTML = '';
-    DataFetch.fetchFilmByID().then(film =>{
-      createFilmCard(film)
-    })
-    Refs.backDrop.classList.toggle('is-hidden')
-    // ============close modal
-    onClickButtonModalClose()
-    onClickBackdropModalClose()
-    onPressEscapeModalClose()
+  DataFetch.fetchFilmByID().then(film =>{createFilmCard(film)})
+  Refs.backDrop.classList.toggle('is-hidden')
+  onModalClose()
+  Refs.body.classList.add("modal-open")
   }
+// ==================function createFilmCard ===============
   function createFilmCard(film){
     const  {original_title , title, poster_path ,vote_average,vote_count,popularity,genres,overview} = film
     let filmGenry = genres[0].name;
     let rounded = Math.round(popularity * 10) / 10
-    Refs.productCardInWindow.insertAdjacentHTML('afterbegin',filmCard({original_title , title, poster_path ,vote_average,vote_count,rounded,filmGenry,overview}),)
+    Refs.modalContentContainer.insertAdjacentHTML('afterbegin',filmCard({original_title , title, poster_path ,vote_average,vote_count,rounded,filmGenry,overview}),)
   }
- 
-
-
+ // ==================function onClickPaginationTopFilms ===
   function onClickPaginationTopFilms (){
     dataFetch.page = 0;
     const instance = new Pagination(Refs.paginationContainer, {
