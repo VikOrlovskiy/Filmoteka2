@@ -9,10 +9,6 @@ const DEBOUNCE_DELAY = 300;
 Refs.backHomePage.addEventListener('click' , onClickReloadPage)
 // ==================search by input========================
 Refs.searchInput.addEventListener('input', debounce(onFilmSerchValue, DEBOUNCE_DELAY));
-// ==================navigation btn=========================
-Refs.navigationPanel.addEventListener('click', onClickChengeNavigationPage)
-// ==================library btn============================
-Refs.userButtons.addEventListener('click', onClickShowWatchedAndQueue)
 // =================functions===============================
 function onClickReloadPage(){location.reload()}
 // ====================serch film==========================
@@ -33,47 +29,6 @@ function onFilmSerchValue(e) {
       onClickPaginationFilms ()
     })
 }
-function onClickChengeNavigationPage(e){
-    // active btn
-    const activeBtn = document.querySelector('.navigation_button.active');
-    // close gate !btn
-    if(e.target.nodeName !== 'BUTTON'){return}
-    // chenge disabled btn
-    activeBtn.disabled = false;
-    e.target.disabled = true;
-    // chenge active class btn
-    activeBtn.classList.remove('active');
-    e.target.classList.add('active');
-    // chenge bg header
-    Refs.headerContainer.classList.toggle('active');
-    // hide serch block
-    Refs.searchBlock.classList.toggle('is-hidden');
-    // show library buttons
-    Refs.userButtons.classList.toggle('is-hidden');
-    // fetch users film
-   if(e.target.dataset.action === 'LIBRARY'){
-    // clear library field
-    Refs.galleryRef.innerHTML = '<p>you</p>';
-    Refs.paginationContainer.classList.add("is-hidden")
-    // fetch user library films
-    return;
-    }
-    //click in home btn
-    Refs.errorTextField.textContent = '';
-    onClickReloadPage()
-}
-function onClickShowWatchedAndQueue(e){
-    // close gate !btn
-    if (e.target.nodeName !== 'BUTTON') {return}
-    // active btn
-    const activeBtn = document.querySelector('.button.active');
-    // chenge disabled btn
-    activeBtn.disabled = false;
-    e.target.disabled = true;
-    // chenge active class btn
-    activeBtn.classList.remove('active');
-    e.target.classList.add('active');
-}
 function onClickPaginationFilms (){
     dataFetch.page = 1;
     const instance2 = new Pagination(Refs.paginationContainer, {
@@ -83,7 +38,6 @@ function onClickPaginationFilms (){
       centerAlign: true,
     });
     instance2.on('beforeMove', (event) => {
-      console.log(event.page)
       dataFetch.page = event.page;
       dataFetch.fetchFilms().then(films => {
         Refs.galleryRef.innerHTML = '';
