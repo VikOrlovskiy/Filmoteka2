@@ -6,8 +6,9 @@ export default  {
     backHomePage:document.querySelector('.name'),
     // =====================navigation panel=======================
     navigationPanel: document.querySelector('.navigation'),
-    homeButton: document.querySelector('[HOME]'),
-    myGalleryButton: document.querySelector('[LIBRARY]'),
+    // homeButton: document.getElementById('HOME'),
+    // myGalleryButton: document.getElementById('LIBRARY'),
+    // formButton: document.getElementById('form-open'),
     userButtons:document.querySelector('.header-button-block'),
     // ===============search=======================================
     searchBlock: document.querySelector('.search'),
@@ -18,8 +19,8 @@ export default  {
     // =======================modal=================================
     backDrop: document.querySelector('.back-drop'),
     modalWindow: document.querySelector('.modal'),
-    modalContentContainer: document.querySelector('.container-modal'),
     modalButtonClose:document.querySelector('.modal_close'),
+    modalContentContainer: document.querySelector('.container-modal'),
     // =======================pagination============================
     paginationContainer:document.getElementById('pagination'),
     // =======================footer================================
