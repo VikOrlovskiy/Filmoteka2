@@ -25,6 +25,7 @@ body {
   font-size: $primary-font-size;
 }
 body.modal-open {
+  margin-left: -2px;
   max-height: 100vh;
   overflow: hidden;
 }
