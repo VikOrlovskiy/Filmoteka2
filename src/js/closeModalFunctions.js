@@ -12,6 +12,8 @@ function onPressEscapeModalClose(){
       Refs.backDrop.classList.add('is-hidden')
       Refs.body.classList.remove("modal-open")
       Refs.modalWindow.classList.remove("modal_form")
+      Refs.modalContentContainer.innerHTML = '';
+      
     })
   }
   // ======== close madal by backdrop click ==
@@ -21,6 +23,7 @@ function onPressEscapeModalClose(){
       Refs.backDrop.classList.add('is-hidden')
       Refs.body.classList.remove("modal-open")
       Refs.modalWindow.classList.remove("modal_form")
+      Refs.modalContentContainer.innerHTML = '';
     })
   }
     // ====== close madal by close btn click ==
@@ -28,7 +31,8 @@ function onPressEscapeModalClose(){
     Refs.modalButtonClose.addEventListener('click', e => {
     Refs.body.classList.remove("modal-open")
     Refs.backDrop.classList.add('is-hidden')
-    Refs.modalWindow.classList.remove("modal_form")})
+    Refs.modalWindow.classList.remove("modal_form")
+    Refs.modalContentContainer.innerHTML = '';})
   }
 
   export{onModalClose}
