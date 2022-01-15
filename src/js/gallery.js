@@ -22,7 +22,6 @@ async function onloadFetchTopfilms(){
 // ==================function open film by click============
 function openfilm(e) {
   if(e.target.nodeName === 'UL' || e.target.nodeName === 'LI'){return}
-  Refs.modalContentContainer.innerHTML = '';
   DataFetch.moveID = e.target.parentNode.dataset.id
   DataFetch.fetchFilmByID().then(film =>{createFilmCard(film)})
   Refs.backDrop.classList.toggle('is-hidden')
