@@ -6,9 +6,6 @@ export default  {
     backHomePage:document.querySelector('.name'),
     // =====================navigation panel=======================
     navigationPanel: document.querySelector('.navigation'),
-    // homeButton: document.getElementById('HOME'),
-    // myGalleryButton: document.getElementById('LIBRARY'),
-    // formButton: document.getElementById('form-open'),
     userButtons:document.querySelector('.header-button-block'),
     // ===============search=======================================
     searchBlock: document.querySelector('.search'),
