@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from 'firebase/auth';
+import Refs from "./Refs";
+import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , deleteUser ,signOut} from 'firebase/auth';
 import { getDatabase, ref, set, child, get  } from "firebase/database";
 const firebaseConfig = {
     apiKey: "AIzaSyBR83s7HPzADcrtRoUE2ndSXGar5JAgfWk",
@@ -17,31 +18,30 @@ const auth = getAuth();
 const db = getDatabase();
 const database = getDatabase();
 // ========== Auth State ====================
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // console.log(user)
-        const uid = user.uid;
-        // console.log(uid)
-        // console.log(user.email)
-        // console.log(user.accessToken)
-         let Collection = [2345678,3424235236,235235325235,325235326]
-         let nameCollection = 'Watched'
-         writeUserData(uid,Collection)
-         readUserData(uid)
-        // writeToFBHundler(user.accessToken,nameCollection,user.uid,Collection) 
-        // readFromFBHundler(user.accessToken,nameCollection,user.uid)
-    } else {
-        console.log('eror')
-    }
-  });
+// onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//         // console.log(user)
+//         const uid = user.uid;
+//         // console.log(uid)
+//         // console.log(user.email)
+//         console.log(user.accessToken)
+//          let Collection = [2345678,3424235236,235235325235,325235326]
+//          let nameCollection = 'Watched'
+//          writeUserData(uid,Collection)
+//          readUserData(uid)
+//         // writeToFBHundler(user.accessToken,nameCollection,user.uid,Collection) 
+//         // readFromFBHundler(user.accessToken,nameCollection,user.uid)
+//     } else {
+//         console.log('eror')
+//     }
+//   });
 // ==========login to Firebase====================
 function RegistrationWithEmailAndPassword(email, password) {
 createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    console.log(user)
-    // ...
+    localStorage.setItem('userData', JSON.stringify(user.accessToken,user.uid));
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -57,6 +57,7 @@ signInWithEmailAndPassword(auth, email, password)
     // Signed in 
     const user = userCredential.user;
     console.log(user)
+    localStorage.setItem('userData', JSON.stringify(user.accessToken ,user.uid));
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -64,6 +65,10 @@ signInWithEmailAndPassword(auth, email, password)
     console.log(errorMessage)
     console.log(errorCode)
   });
+}
+function logOutAuthUser(){
+  console.log('userOut')
+  signOut()
 }
 export{authWithEmailAndPassword,RegistrationWithEmailAndPassword}
 
