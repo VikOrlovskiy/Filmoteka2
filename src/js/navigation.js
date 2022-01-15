@@ -14,7 +14,6 @@ function onClickChengeNavigationPage(e){
     // close gate !btn
   if(e.target.nodeName !== 'BUTTON'){return}
   if(e.target.dataset.action === 'form'){
-  Refs.modalContentContainer.innerHTML = '';
   Refs.body.classList.add("modal-open")
   Refs.modalWindow.classList.add("modal_form")
   renderForm(formLogIn)
@@ -60,6 +59,10 @@ function onSubmitEntryForm(e){
     const password = e.target.querySelector('#password').value;
     authWithEmailAndPassword(email, password);
     this.reset()
+    Refs.body.classList.remove("modal-open")
+    Refs.backDrop.classList.add('is-hidden')
+    Refs.modalWindow.classList.remove("modal_form")
+    Refs.modalContentContainer.innerHTML = ''
     console.log(email,password)
 }
 function onSubmitRegistrationForm(e){
@@ -69,6 +72,10 @@ function onSubmitRegistrationForm(e){
     const passwordConfirm = e.target.querySelector('#passwordConfirm').value;
     RegistrationWithEmailAndPassword(email, password);
     this.reset()
+    Refs.body.classList.remove("modal-open")
+    Refs.backDrop.classList.add('is-hidden')
+    Refs.modalWindow.classList.remove("modal_form")
+    Refs.modalContentContainer.innerHTML = ''
     console.log(email,password,passwordConfirm)
 }
 function onClickShowWatchedAndQueue(e){
@@ -83,6 +90,7 @@ function onClickShowWatchedAndQueue(e){
     activeBtn.classList.remove('active');
     e.target.classList.add('active');
 }
+
 function onRegistrationLinkClick(e){
     Refs.modalContentContainer.innerHTML = '';
     renderForm(formRegistration)
