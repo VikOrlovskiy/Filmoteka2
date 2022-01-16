@@ -1,17 +1,78 @@
 import Refs from "./Refs";
 import DataFetch from "./apiServiceSearch";
 import {renderFilmsCard} from "./renderFilmsCard";
+import {logOutAuthUser,authState,readUserDataByCategoryName,writeUserDataByCategoryName} from "./fireBaseApi";
 import Pagination from 'tui-pagination';
 const dataFetch = new DataFetch()
 const debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
 // ==================reload page ============================
 Refs.backHomePage.addEventListener('click' , onClickReloadPage)
+// ==================logOut========================
+Refs.logOutButton.addEventListener('click' , logOutAuthUser)
+// ==================search by input========================
+Refs.logInButton.addEventListener('click' , onClickregistrationOrlogInUser)
 // ==================search by input========================
 Refs.searchInput.addEventListener('input', debounce(onFilmSerchValue, DEBOUNCE_DELAY));
 // =================functions===============================
 function onClickReloadPage(){location.reload()}
+authState()
+// let fims = [12341244124,34324234,3252353,32546,3423432]
+// writeUserDataByCategoryName('Watched',fims)
+readUserDataByCategoryName('Watched')
 // ====================serch film==========================
+import {onModalClose} from "./closeModalFunctions";
+import {RegistrationWithEmailAndPassword,authWithEmailAndPassword} from "./fireBaseApi";
+import formLogIn from '../templates/formLogIn.hbs';
+import formRegistration from '../templates/formRegistration.hbs';
+
+function onClickregistrationOrlogInUser(){
+    Refs.body.classList.add("modal-open")
+    Refs.modalWindow.classList.add("modal_form")
+    renderForm(formLogIn)
+    let form = document.querySelector('.form')
+    form.addEventListener('submit', onSubmitEntryForm)
+    form.querySelector('.to_signup').addEventListener('click',onRegistrationLinkClick)
+    Refs.backDrop.classList.toggle('is-hidden')
+    onModalClose()
+}
+function renderForm(value){
+  Refs.modalContentContainer.insertAdjacentHTML('afterbegin', value())
+}
+function onSubmitEntryForm(e){
+  e.preventDefault()
+  const email = e.target.querySelector('#email').value;
+  const password = e.target.querySelector('#password').value;
+  authWithEmailAndPassword(email, password);
+  this.reset()
+  Refs.body.classList.remove("modal-open")
+  Refs.backDrop.classList.add('is-hidden')
+  Refs.modalWindow.classList.remove("modal_form")
+  Refs.modalContentContainer.innerHTML = ''
+  console.log(email,password)
+}
+function onSubmitRegistrationForm(e){
+  e.preventDefault()
+  const email = e.target.querySelector('#email').value;
+  const password = e.target.querySelector('#password').value;
+  const passwordConfirm = e.target.querySelector('#passwordConfirm').value;
+  RegistrationWithEmailAndPassword(email, password);
+  this.reset()
+  Refs.body.classList.remove("modal-open")
+  Refs.backDrop.classList.add('is-hidden')
+  Refs.modalWindow.classList.remove("modal_form")
+  Refs.modalContentContainer.innerHTML = ''
+  console.log(email,password,passwordConfirm)
+}
+
+function onRegistrationLinkClick(e){
+  Refs.modalContentContainer.innerHTML = '';
+  renderForm(formRegistration)
+  let form = document.querySelector('.form')
+  form.addEventListener('submit', onSubmitRegistrationForm)
+}
+
+
 function onFilmSerchValue(e) {
     e.preventDefault()
     if( e.target.value === ''){

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import Refs from "./Refs";
-import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , deleteUser ,signOut} from 'firebase/auth';
+import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , reauthenticateWithCredential  ,signOut} from 'firebase/auth';
 import { getDatabase, ref, set, child, get  } from "firebase/database";
 const firebaseConfig = {
     apiKey: "AIzaSyBR83s7HPzADcrtRoUE2ndSXGar5JAgfWk",
@@ -17,31 +17,34 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getDatabase();
 const database = getDatabase();
+
 // ========== Auth State ====================
-// onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         // console.log(user)
-//         const uid = user.uid;
-//         // console.log(uid)
-//         // console.log(user.email)
-//         console.log(user.accessToken)
-//          let Collection = [2345678,3424235236,235235325235,325235326]
-//          let nameCollection = 'Watched'
-//          writeUserData(uid,Collection)
-//          readUserData(uid)
-//         // writeToFBHundler(user.accessToken,nameCollection,user.uid,Collection) 
-//         // readFromFBHundler(user.accessToken,nameCollection,user.uid)
-//     } else {
-//         console.log('eror')
-//     }
-//   });
+function authState(){
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const uid = user.uid;
+        console.log(uid)
+        console.log(user.email)
+        localStorage.setItem('userId',uid)
+        // console.log(user.accessToken)
+        //  let Collection = [2345678,3424235236,235235325235,325235326]
+        //  let nameCollection = 'Watched'
+        //  writeUserData(uid,Collection)
+        //  readUserData(uid)
+        // writeToFBHundler(user.accessToken,nameCollection,user.uid,Collection) 
+        // readFromFBHundler(user.accessToken,nameCollection,user.uid)
+    } else {
+      console.log('no user')
+    }
+  });
+}
 // ==========login to Firebase====================
 function RegistrationWithEmailAndPassword(email, password) {
 createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    localStorage.setItem('userData', JSON.stringify(user.accessToken,user.uid));
+    console.log(user)
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -57,7 +60,6 @@ signInWithEmailAndPassword(auth, email, password)
     // Signed in 
     const user = userCredential.user;
     console.log(user)
-    localStorage.setItem('userData', JSON.stringify(user.accessToken ,user.uid));
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -67,10 +69,11 @@ signInWithEmailAndPassword(auth, email, password)
   });
 }
 function logOutAuthUser(){
+  localStorage.clear()
   console.log('userOut')
-  signOut()
+  signOut(auth)
 }
-export{authWithEmailAndPassword,RegistrationWithEmailAndPassword}
+export{authWithEmailAndPassword,RegistrationWithEmailAndPassword,logOutAuthUser,authState,readUserDataByCategoryName,writeUserDataByCategoryName}
 
 // function writeToFBHundler(accessToken,nameCollection,uid,Collection) {
 //     console.log(nameCollection)
@@ -95,23 +98,46 @@ export{authWithEmailAndPassword,RegistrationWithEmailAndPassword}
 //       .then(response => response.json())
 //       .then(response => console.log(response))
 //   }
+
+
+
+// ========== read User Data to Firebase====================
+function readUserDataByCategoryName(category){
+  readUserData()
+}
 // ========== write User Data to Firebase====================
-  function writeUserData(userId, Collection) {
-    set(ref(db, 'users/' + userId), {
-      queue:Collection,
-      Watched:Collection,
+function writeUserDataByCategoryName(name,data){
+  console.log(name)
+  if(name === 'Watched'){
+    writeWatchedData(localStorage.getItem('userId'),data)
+  }
+}
+  function writeWatchedData(userId,data) {
+    set(ref(db, `users//` + userId), {
+      Watched:data,
     });
   }
   const dbRef = ref(getDatabase());
 // ========== read User Data to Firebase====================
-  function readUserData(userId){
-    get(child(dbRef, `users/${userId}`)).then((data) => {
-        if (data.exists()) {
-          console.log(data.val());
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
-  }
+function readUserData(userId,category){
+  get(child(dbRef, `users/${userId}/${category}`)).then((data) => {
+      if (data.exists()) {
+        console.log(data.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+// function reauthenticateUser(){
+//   let userData = JSON.parse(localStorage.getItem('userData'));
+//   // const credential = promptForCredentials();
+// reauthenticateWithCredential(userData.accessToken, userData).then(() => {
+//   console.log('13213')
+//   // User re-authenticated.
+// }).catch((error) => {
+//   // An error ocurred
+//   // ...
+// });
+// }

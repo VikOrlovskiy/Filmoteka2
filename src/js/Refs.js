@@ -7,6 +7,8 @@ export default  {
     // =====================navigation panel=======================
     navigationPanel: document.querySelector('.navigation'),
     userButtons:document.querySelector('.header-button-block'),
+    logInButton:document.querySelector('#form-open'),
+    logOutButton:document.querySelector('#logOut'),
     // ===============search=======================================
     searchBlock: document.querySelector('.search'),
     searchInput: document.querySelector('.search_input'),
