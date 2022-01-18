@@ -1,8 +1,12 @@
 import Refs from "./Refs";
 import DataFetch from "./apiServiceSearch";
 import {renderFilmsCard} from "./renderFilmsCard";
-import {logOutAuthUser,authState,readUserDataByCategoryName,writeUserDataByCategoryName} from "./fireBaseApi";
+import {logOutAuthUser,authState,authWithEmailAndPassword,RegistrationWithEmailAndPassword} from "./fireBaseApi";
+import {writeUserDataByCategoryName,readUserDataByCategoryName} from "./readOrWriteUserData";
 import Pagination from 'tui-pagination';
+import {onModalClose} from "./closeModalFunctions";
+import formLogIn from '../templates/formLogIn.hbs';
+import formRegistration from '../templates/formRegistration.hbs';
 const dataFetch = new DataFetch()
 const debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
@@ -17,15 +21,10 @@ Refs.searchInput.addEventListener('input', debounce(onFilmSerchValue, DEBOUNCE_D
 // =================functions===============================
 function onClickReloadPage(){location.reload()}
 authState()
-// let fims = [12341244124,34324234,3252353,32546,3423432]
-// writeUserDataByCategoryName('Watched',fims)
-readUserDataByCategoryName('Watched')
+let fims = [12341244124,34324234,3252353,32546,3423432]
+writeUserDataByCategoryName('Watched',fims)
+// readUserDataByCategoryName('Watched',localStorage.getItem('userID'))
 // ====================serch film==========================
-import {onModalClose} from "./closeModalFunctions";
-import {RegistrationWithEmailAndPassword,authWithEmailAndPassword} from "./fireBaseApi";
-import formLogIn from '../templates/formLogIn.hbs';
-import formRegistration from '../templates/formRegistration.hbs';
-
 function onClickregistrationOrlogInUser(){
     Refs.body.classList.add("modal-open")
     Refs.modalWindow.classList.add("modal_form")

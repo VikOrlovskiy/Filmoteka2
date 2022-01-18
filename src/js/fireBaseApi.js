@@ -15,8 +15,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const db = getDatabase();
-const database = getDatabase();
 
 // ========== Auth State ====================
 function authState(){
@@ -27,12 +25,6 @@ onAuthStateChanged(auth, (user) => {
         console.log(user.email)
         localStorage.setItem('userId',uid)
         // console.log(user.accessToken)
-        //  let Collection = [2345678,3424235236,235235325235,325235326]
-        //  let nameCollection = 'Watched'
-        //  writeUserData(uid,Collection)
-        //  readUserData(uid)
-        // writeToFBHundler(user.accessToken,nameCollection,user.uid,Collection) 
-        // readFromFBHundler(user.accessToken,nameCollection,user.uid)
     } else {
       console.log('no user')
     }
@@ -73,7 +65,7 @@ function logOutAuthUser(){
   console.log('userOut')
   signOut(auth)
 }
-export{authWithEmailAndPassword,RegistrationWithEmailAndPassword,logOutAuthUser,authState,readUserDataByCategoryName,writeUserDataByCategoryName}
+export{authWithEmailAndPassword,RegistrationWithEmailAndPassword,logOutAuthUser,authState}
 
 // function writeToFBHundler(accessToken,nameCollection,uid,Collection) {
 //     console.log(nameCollection)
@@ -99,45 +91,3 @@ export{authWithEmailAndPassword,RegistrationWithEmailAndPassword,logOutAuthUser,
 //       .then(response => console.log(response))
 //   }
 
-
-
-// ========== read User Data to Firebase====================
-function readUserDataByCategoryName(category){
-  readUserData()
-}
-// ========== write User Data to Firebase====================
-function writeUserDataByCategoryName(name,data){
-  console.log(name)
-  if(name === 'Watched'){
-    writeWatchedData(localStorage.getItem('userId'),data)
-  }
-}
-  function writeWatchedData(userId,data) {
-    set(ref(db, `users//` + userId), {
-      Watched:data,
-    });
-  }
-  const dbRef = ref(getDatabase());
-// ========== read User Data to Firebase====================
-function readUserData(userId,category){
-  get(child(dbRef, `users/${userId}/${category}`)).then((data) => {
-      if (data.exists()) {
-        console.log(data.val());
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-}
-// function reauthenticateUser(){
-//   let userData = JSON.parse(localStorage.getItem('userData'));
-//   // const credential = promptForCredentials();
-// reauthenticateWithCredential(userData.accessToken, userData).then(() => {
-//   console.log('13213')
-//   // User re-authenticated.
-// }).catch((error) => {
-//   // An error ocurred
-//   // ...
-// });
-// }
