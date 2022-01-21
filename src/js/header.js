@@ -42,6 +42,7 @@ function onSubmitEntryForm(e){
   e.preventDefault()
   const email = e.target.querySelector('#email').value;
   const password = e.target.querySelector('#password').value;
+  console.log(email,password)
   authWithEmailAndPassword(email, password);
   this.reset()
   Refs.body.classList.remove("modal-open")
